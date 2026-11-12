@@ -286,12 +286,31 @@ button {
   background: var(--color-cream);
 }
 
-.hero-video {
+/* Слайд с видео: тёмный, на весь экран, шапка поверх */
+.hero-slide.is-dark {
+  background: #0d0705;
+}
+
+.hero-slide.is-dark .hero-panels {
+  display: block;
+  inset: var(--promo-h) 0 0 0;
+}
+
+.hero-media {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
+}
+
+.hero-slide.is-dark .hero-veil {
+  background: linear-gradient(to bottom, #595552 0%, #fff 22%, #fff 46%, #8f8a86 72%, #2e2824 100%);
+}
+
+html.hero-dark .site-header.is-over-hero {
+  color: #fff;
 }
 
 .hero-panel img {

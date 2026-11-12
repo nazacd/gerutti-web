@@ -46,11 +46,9 @@ npm run dev
 python3 scripts/build-media.py
 ```
 
-Чтобы поставить видео на первый экран, положите файл в `public/media/` и добавьте слайду поле `video`:
-
-```ts
-{ kicker: "…", title: "…", offer: "…", cta: "…", href: "/catalog/", images: [...], video: "hero.mp4" }
-```
+Видео первого экрана — `public/media/hero.mp4` (горизонтальное) и `hero-mobile.mp4` (вертикальное для телефонов),
+постеры — `hero-poster.webp` и `hero-mobile-poster.webp`. Чтобы заменить ролик, положите новые файлы с теми же именами
+и поправьте `duration` (в миллисекундах) у первого слайда в `src/app/page.tsx`.
 
 ## Публикация
 

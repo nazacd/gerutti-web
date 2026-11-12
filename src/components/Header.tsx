@@ -79,9 +79,9 @@ export function Header() {
       )}
 
       <header
-        className={`fixed inset-x-0 z-40 h-[var(--header-h)] text-navy transition-[background-color,border-color,box-shadow] duration-300 ${
+        className={`site-header fixed inset-x-0 z-40 h-[var(--header-h)] text-navy transition-[background-color,border-color,color] duration-500 ${
           overHero
-            ? "border-b border-transparent bg-transparent"
+            ? "is-over-hero border-b border-transparent bg-transparent"
             : "border-b border-line/80 bg-paper/90 backdrop-blur-md"
         }`}
         style={{ top: "var(--promo-h)" }}

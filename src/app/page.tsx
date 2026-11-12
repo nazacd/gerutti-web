@@ -9,12 +9,26 @@ import { ArrowRight } from "@/components/Icons";
 
 const slides: HeroSlide[] = [
   {
-    kicker: "Новая коллекция",
-    title: "Четыре оттенка осени",
-    offer: site.season,
+    kicker: site.season,
+    title: "Новая коллекция",
+    offer: site.tagline,
     cta: "Смотреть коллекцию",
     href: "/catalog/",
-    images: ["tabak-2", "palisandr-2", "oliva-2"],
+    video: {
+      src: "hero.mp4",
+      poster: "hero-poster.webp",
+      mobileSrc: "hero-mobile.mp4",
+      mobilePoster: "hero-mobile-poster.webp",
+      duration: 5000,
+    },
+  },
+  {
+    kicker: "Одна куртка",
+    title: "Четыре оттенка осени",
+    offer: "Табак · Песок · Олива · Палисандр",
+    cta: "Выбрать оттенок",
+    href: "/catalog/",
+    images: ["pesok-2", "palisandr-2", "oliva-2"],
   },
   {
     kicker: "Lookbook",
