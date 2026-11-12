@@ -1,0 +1,642 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #1b2b45;
+  --color-navy-deep: #0e1828;
+  --color-navy-soft: #2a3d5c;
+  --color-cream: #f1e9de;
+  --color-paper: #faf7f2;
+  --color-ink: #161b24;
+  --color-muted: #6c7180;
+  --color-faint: #9aa0ab;
+  --color-line: #e4dccf;
+  --color-sand: #cdb89c;
+
+  --font-sans: "Inter Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  --promo-h: 0px;
+  --header-h: 56px;
+  --top-offset: calc(var(--promo-h) + var(--header-h));
+  --gutter: 16px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 32px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --gutter: 56px;
+  }
+}
+
+html.has-promo {
+  --promo-h: 38px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.scroll-locked {
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--color-navy);
+  color: var(--color-cream);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 3px;
+}
+
+input:focus-visible {
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ---------- Layout helpers ---------- */
+
+.container-x {
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.page {
+  padding-top: var(--top-offset);
+  min-height: 70svh;
+}
+
+/* ---------- Typography helpers ---------- */
+
+.kicker {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.caps {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.wordmark {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.link-underline {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  transition: opacity 0.2s ease;
+}
+
+.link-underline:hover {
+  opacity: 0.6;
+}
+
+/* ---------- Photos ----------
+   Фото сняты на белом фоне. Режим multiply «красит» белый в цвет подложки,
+   поэтому снимки выглядят так, будто сделаны на фирменном кремовом фоне. */
+
+.photo-stage {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-cream);
+  isolation: isolate;
+}
+
+.photo-stage > img,
+.photo-stage .photo {
+  mix-blend-mode: multiply;
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 28px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    opacity 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--color-navy);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--color-navy-deep);
+}
+
+.btn-light {
+  background: var(--color-cream);
+  color: var(--color-navy);
+}
+
+.btn-light:hover {
+  background: #fff;
+}
+
+.btn-outline {
+  border: 1px solid var(--color-navy);
+  color: var(--color-navy);
+}
+
+.btn-outline:hover {
+  background: var(--color-navy);
+  color: #fff;
+}
+
+.btn-outline-light {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.btn-outline-light:hover {
+  background: #fff;
+  color: var(--color-navy);
+}
+
+.btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+}
+
+.icon-btn:hover {
+  opacity: 0.6;
+}
+
+/* ---------- Scroll reveal ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s var(--ease-out-soft),
+    transform 0.9s var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 560px;
+  background: var(--color-cream);
+  overflow: hidden;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background: var(--color-cream);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 1.2s ease,
+    visibility 0s linear 1.2s;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 1.2s ease,
+    visibility 0s;
+  z-index: 1;
+}
+
+.hero-panels {
+  position: absolute;
+  inset: var(--top-offset) 0 0 0;
+}
+
+.hero-panel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--color-cream);
+}
+
+/* Слайд с видео: тёмный, на весь экран, шапка поверх */
+.hero-slide.is-dark {
+  background: #0d0705;
+}
+
+.hero-slide.is-dark .hero-panels {
+  inset: var(--promo-h) 0 0 0;
+}
+
+.hero-slide.is-video .hero-panels {
+  display: block;
+}
+
+.hero-slide.is-dark .hero-panel {
+  background: #0d0705;
+}
+
+.hero-slide.is-dark .hero-panel img {
+  mix-blend-mode: normal;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.hero-slide.is-dark .hero-veil {
+  background: linear-gradient(to bottom, #595552 0%, #fff 22%, #fff 46%, #8f8a86 72%, #2e2824 100%);
+}
+
+html.hero-dark .site-header.is-over-hero {
+  color: #fff;
+}
+
+.hero-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  mix-blend-mode: multiply;
+  transform: scale(1.02);
+}
+
+.hero-slide.is-active .hero-panel img {
+  animation: hero-zoom 9s ease-out both;
+}
+
+/* На телефоне кадры одного слайда сменяют друг друга */
+.hero-slide .hero-panel {
+  opacity: 0;
+}
+
+.hero-slide .hero-panel:nth-child(1) {
+  opacity: 1;
+}
+
+.hero-slide.is-active .hero-panel:nth-child(2) {
+  animation: hero-fade-in 1.2s ease 2.6s both;
+}
+
+.hero-slide.is-active .hero-panel:nth-child(3) {
+  animation: hero-fade-in 1.2s ease 5.2s both;
+}
+
+@media (min-width: 768px) {
+  .hero-panels {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-slide .hero-panel {
+    position: relative;
+    inset: auto;
+    opacity: 1;
+    animation: none !important;
+  }
+
+  .hero-slide .hero-panel:nth-child(3) {
+    display: none;
+  }
+
+  .hero-slide.is-active .hero-panel {
+    animation: hero-panel-in 1.4s var(--ease-out-soft) both !important;
+  }
+
+  .hero-slide.is-active .hero-panel:nth-child(2) {
+    animation-delay: 0.12s !important;
+  }
+
+  .hero-slide.is-active .hero-panel:nth-child(3) {
+    animation-delay: 0.24s !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-panels {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hero-slide .hero-panel:nth-child(3) {
+    display: block;
+  }
+}
+
+/* Затемнение снизу через multiply: тень, а не «туман» поверх светлого фона */
+.hero-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, #fff 38%, #b9b4b3 62%, #5b6170 82%, #262f42 100%);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.hero-copy > * {
+  opacity: 0;
+}
+
+.hero-slide.is-active .hero-copy > * {
+  animation: rise-in 1s var(--ease-out-soft) both;
+}
+
+.hero-slide.is-active .hero-copy > *:nth-child(1) {
+  animation-delay: 0.35s;
+}
+.hero-slide.is-active .hero-copy > *:nth-child(2) {
+  animation-delay: 0.5s;
+}
+.hero-slide.is-active .hero-copy > *:nth-child(3) {
+  animation-delay: 0.65s;
+}
+.hero-slide.is-active .hero-copy > *:nth-child(4) {
+  animation-delay: 0.8s;
+}
+
+.hero-progress {
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+.hero-progress.is-running {
+  animation: progress linear both;
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.09);
+  }
+}
+
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------- Tiles & cards ---------- */
+
+.tile .photo {
+  transition: transform 1.4s var(--ease-out-soft);
+}
+
+.tile:hover .photo {
+  transform: scale(1.04);
+}
+
+.tile-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, #fff 58%, #a9a7ab 80%, #4f5666 100%);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------- Overlays ---------- */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(14, 24, 40, 0.45);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 70;
+  width: min(420px, 100vw);
+  background: var(--color-paper);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.45s var(--ease-out-soft), visibility 0s linear 0.45s;
+  visibility: hidden;
+  box-shadow: 0 0 60px rgba(14, 24, 40, 0.18);
+}
+
+.drawer-right {
+  right: 0;
+  transform: translateX(100%);
+}
+
+.drawer-left {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.drawer.is-open {
+  transform: none;
+  visibility: visible;
+  transition: transform 0.45s var(--ease-out-soft), visibility 0s;
+}
+
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 70;
+  background: var(--color-paper);
+  border-radius: 16px 16px 0 0;
+  transform: translateY(100%);
+  visibility: hidden;
+  transition: transform 0.4s var(--ease-out-soft), visibility 0s linear 0.4s;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.sheet.is-open {
+  transform: none;
+  visibility: visible;
+  transition: transform 0.4s var(--ease-out-soft), visibility 0s;
+}
+
+.toast {
+  animation: toast-in 0.4s var(--ease-out-soft) both;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.dropdown {
+  animation: dropdown-in 0.18s ease both;
+  transform-origin: top;
+}
+
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.accordion-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s var(--ease-out-soft);
+}
+
+.accordion-body.is-open {
+  grid-template-rows: 1fr;
+}
+
+.accordion-body > div {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
