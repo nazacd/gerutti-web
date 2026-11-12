@@ -41,6 +41,7 @@ export function ProductView({ product }: { product: Product }) {
   const [lightbox, setLightbox] = useState<number | null>(null);
   const imageRefs = useRef<(HTMLElement | null)[]>([]);
   const swipeRef = useRef<HTMLDivElement>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
   const sizeRef = useRef<HTMLDivElement>(null);
   const fav = isFavorite(product.id);
   const siblings = products.filter((p) => p.id !== product.id);
@@ -56,7 +57,7 @@ export function ProductView({ product }: { product: Product }) {
           }
         });
       },
-      { rootMargin: "-45% 0px -45% 0px" },
+      { root: galleryRef.current, rootMargin: "-45% 0px -45% 0px" },
     );
     imageRefs.current.forEach((el) => el && io.observe(el));
     return () => io.disconnect();
@@ -152,53 +153,55 @@ export function ProductView({ product }: { product: Product }) {
             </div>
           </div>
 
-          {/* Десктоп: вертикальная лента с миниатюрами */}
-          <div className="hidden md:block">
-            <div className="sticky z-10 h-0" style={{ top: "calc(var(--top-offset) + 16px)" }}>
-              <div className="absolute left-4 top-0 flex flex-col gap-2">
-                {product.images.map((name, i) => (
-                  <button
-                    key={name}
-                    type="button"
-                    aria-label={`Фото ${i + 1}`}
-                    onClick={() => imageRefs.current[i]?.scrollIntoView({ behavior: "smooth", block: "start" })}
-                    className={`photo-stage h-[66px] w-[44px] outline-offset-2 transition-[outline-color] ${
-                      i === activeImage ? "outline outline-1 outline-navy" : "outline outline-1 outline-transparent"
-                    }`}
-                  >
-                    <img src={photo(name).small} alt="" className="photo" />
-                  </button>
-                ))}
-              </div>
+          {/* Десктоп: лента фото прокручивается внутри своей колонки, страница — отдельно */}
+          <div
+            className="sticky hidden md:block"
+            style={{ top: "var(--top-offset)", height: "calc(100svh - var(--top-offset))" }}
+          >
+            <div className="absolute left-4 top-4 z-10 flex flex-col gap-2">
+              {product.images.map((name, i) => (
+                <button
+                  key={name}
+                  type="button"
+                  aria-label={`Фото ${i + 1}`}
+                  onClick={() =>
+                    galleryRef.current?.scrollTo({ top: imageRefs.current[i]?.offsetTop ?? 0, behavior: "smooth" })
+                  }
+                  className={`photo-stage h-[66px] w-[44px] outline-offset-2 transition-[outline-color] ${
+                    i === activeImage ? "outline outline-1 outline-navy" : "outline outline-1 outline-transparent"
+                  }`}
+                >
+                  <img src={photo(name).small} alt="" className="photo" />
+                </button>
+              ))}
             </div>
-            {product.images.map((name, i) => (
-              <button
-                key={name}
-                type="button"
-                ref={(el) => {
-                  imageRefs.current[i] = el;
-                }}
-                aria-label="Открыть фото на весь экран"
-                onClick={() => setLightbox(i)}
-                className="photo-stage block aspect-[2/3] w-full cursor-zoom-in scroll-mt-[var(--top-offset)]"
-              >
-                <img
-                  src={photo(name).src}
-                  alt={i === 0 ? product.name : ""}
-                  className="photo"
-                  loading={i === 0 ? "eager" : "lazy"}
-                />
-              </button>
-            ))}
+            <div ref={galleryRef} className="no-scrollbar relative h-full overflow-y-auto">
+              {product.images.map((name, i) => (
+                <button
+                  key={name}
+                  type="button"
+                  ref={(el) => {
+                    imageRefs.current[i] = el;
+                  }}
+                  aria-label="Открыть фото на весь экран"
+                  onClick={() => setLightbox(i)}
+                  className="photo-stage block aspect-[2/3] w-full cursor-zoom-in"
+                >
+                  <img
+                    src={photo(name).src}
+                    alt={i === 0 ? product.name : ""}
+                    className="photo"
+                    loading={i === 0 ? "eager" : "lazy"}
+                  />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* ---------- Информация ---------- */}
         <div>
-          <div
-            className="container-x pb-10 pt-7 md:sticky md:mx-auto md:max-w-[520px] md:px-10 md:pb-16 md:pt-12"
-            style={{ top: "var(--top-offset)" }}
-          >
+          <div className="container-x pb-10 pt-7 md:mx-auto md:max-w-[520px] md:px-10 md:pb-16 md:pt-12">
             <nav aria-label="Хлебные крошки" className="text-[12px] text-faint">
               <Link href="/" className="hover:text-ink">
                 Главная
