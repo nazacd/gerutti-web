@@ -349,6 +349,11 @@ export function ProductView({ product }: { product: Product }) {
                 <p>
                   Поможем с размером и наличием: {c.phoneHref ? <a href={c.phoneHref}>{c.phone}</a> : c.phone}.
                 </p>
+                {c.telegram && (
+                  <a href={c.telegram} target="_blank" rel="noreferrer" className="link-underline mt-3 inline-block text-navy">
+                    Написать в Telegram
+                  </a>
+                )}
               </Accordion>
             </div>
           </div>

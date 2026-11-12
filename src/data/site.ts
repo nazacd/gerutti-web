@@ -1,6 +1,6 @@
 /**
  * Все данные о магазине — в одном месте.
- * ВНИМАНИЕ: контакты, адрес и цены ниже — демо-значения, их нужно заменить реальными.
+ * Контакты — реальные. Цены в products.ts пока демо-значения.
  * Пустая строка у соцсети/мессенджера = ссылка на сайте не показывается.
  */
 type Contacts = {
@@ -10,34 +10,37 @@ type Contacts = {
   phone: string;
   /** tel:+998... */
   phoneHref: string;
-  /** https://t.me/... */
+  /** Telegram администратора — сюда ведут кнопки «Написать в Telegram» */
   telegram: string;
-  /** https://instagram.com/... */
+  /** Telegram-канал магазина */
+  telegramChannel: string;
   instagram: string;
   email: string;
-  /** Ссылка на точку в Яндекс/Google Картах */
+  /** Ссылка на точку в Яндекс Картах */
   mapUrl: string;
 };
 
 const contacts: Contacts = {
   city: "Ташкент",
-  address: "Адрес магазина",
-  hours: "Ежедневно, 10:00 – 21:00",
-  phone: "+998 00 000 00 00",
-  phoneHref: "",
-  telegram: "",
-  instagram: "",
+  address: "Яккасарай, ул. Бабура, 13",
+  hours: "Ежедневно, 10:00 – 23:00",
+  phone: "+998 77 705 00 33",
+  phoneHref: "tel:+998777050033",
+  telegram: "https://t.me/Gerutti_uz",
+  telegramChannel: "https://t.me/gerutti_men",
+  instagram: "https://www.instagram.com/gerutti_men",
   email: "",
-  mapUrl: "",
+  mapUrl:
+    "https://yandex.uz/maps/10335/tashkent/?ll=69.250848%2C41.296017&mode=poi&poi%5Bpoint%5D=69.250722%2C41.295982&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D5703112591&z=19",
 };
 
 export const site = {
   name: "Gerutti",
   wordmark: "GERUTTI",
   established: "EST. 2020",
-  tagline: "Мужская одежда",
+  tagline: "Casual & Classic",
   description:
-    "Gerutti — мужская одежда спокойных оттенков и чистых линий. Коллекция осень–зима 2026.",
+    "Gerutti — повседневная и классическая мужская одежда в Ташкенте. Коллекция осень–зима 2026.",
   season: "Осень–Зима 2026",
 
   /** false — корзина и оформление заказа временно недоступны */

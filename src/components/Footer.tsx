@@ -6,7 +6,8 @@ export function Footer() {
   const c = site.contacts;
   const socials = [
     c.instagram && { label: "Instagram", href: c.instagram },
-    c.telegram && { label: "Telegram", href: c.telegram },
+    c.telegramChannel && { label: "Telegram-канал", href: c.telegramChannel },
+    c.telegram && { label: "Написать в Telegram", href: c.telegram },
   ].filter(Boolean) as { label: string; href: string }[];
 
   return (
@@ -30,7 +31,7 @@ export function Footer() {
           <div className="wordmark text-[26px] text-cream">{site.wordmark}</div>
           <div className="kicker mt-2 text-cream/50">{site.established}</div>
           <p className="mt-5 max-w-[260px] text-[13px] leading-relaxed">
-            Мужская одежда спокойных оттенков и чистых линий.
+            {site.tagline}. Повседневная и классическая мужская одежда.
           </p>
         </div>
 

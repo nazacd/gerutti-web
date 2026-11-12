@@ -89,7 +89,19 @@ function MenuDrawer() {
             {c.city}, {c.address}
           </p>
           <p>{c.hours}</p>
-          <p>{c.phone}</p>
+          <p>{c.phoneHref ? <a href={c.phoneHref}>{c.phone}</a> : c.phone}</p>
+          <div className="flex flex-wrap gap-x-5 gap-y-1 pt-3 text-ink">
+            {c.telegram && (
+              <a href={c.telegram} target="_blank" rel="noreferrer" className="link-underline">
+                Написать в Telegram
+              </a>
+            )}
+            {c.instagram && (
+              <a href={c.instagram} target="_blank" rel="noreferrer" className="link-underline">
+                Instagram
+              </a>
+            )}
+          </div>
         </div>
       </nav>
     </Drawer>
@@ -110,12 +122,23 @@ function CartDrawer() {
       onClose={close}
       footer={
         <div className="space-y-3">
-          <Link href="/contacts/" onClick={close} className="btn btn-primary w-full">
+          {site.contacts.telegram && (
+            <a href={site.contacts.telegram} target="_blank" rel="noreferrer" className="btn btn-primary w-full">
+              Написать в Telegram
+            </a>
+          )}
+          <Link
+            href="/contacts/"
+            onClick={close}
+            className={`btn w-full ${site.contacts.telegram ? "btn-outline" : "btn-primary"}`}
+          >
             Как нас найти
           </Link>
-          <Link href="/catalog/" onClick={close} className="btn btn-outline w-full">
-            Перейти в каталог
-          </Link>
+          {!site.contacts.telegram && (
+            <Link href="/catalog/" onClick={close} className="btn btn-outline w-full">
+              Перейти в каталог
+            </Link>
+          )}
         </div>
       }
     >
@@ -153,7 +176,8 @@ function CartDrawer() {
             скоро откроется
           </h2>
           <p className="mt-4 max-w-[300px] text-[14px] leading-relaxed text-muted">
-            Мы готовим оформление заказа и доставку. А пока коллекцию можно примерить и купить в нашем магазине.
+            Мы готовим оформление заказа и доставку. А пока напишите нам в Telegram или приходите на примерку в
+            магазин.
           </p>
           <div className="mt-6 text-[13px] leading-relaxed text-ink">
             <div>

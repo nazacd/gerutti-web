@@ -14,6 +14,7 @@ export default function ContactsPage() {
   const links = [
     c.mapUrl && { label: "Построить маршрут", href: c.mapUrl },
     c.telegram && { label: "Написать в Telegram", href: c.telegram },
+    c.telegramChannel && { label: "Telegram-канал", href: c.telegramChannel },
     c.instagram && { label: "Instagram", href: c.instagram },
   ].filter(Boolean) as { label: string; href: string }[];
 
@@ -40,7 +41,7 @@ export default function ContactsPage() {
           </nav>
 
           <div className="kicker mt-10 text-muted">
-            {site.wordmark} · {site.established}
+            {site.tagline} · {site.established}
           </div>
           <h1 className="mt-4 font-serif text-[46px] leading-[1.02] text-navy md:text-[68px]">Наш магазин</h1>
           <p className="mt-5 max-w-[440px] text-[15px] leading-[1.75] text-muted">
