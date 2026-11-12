@@ -145,9 +145,9 @@ export function ProductView({ product }: { product: Product }) {
                 </button>
               ))}
             </div>
-            <div className="pointer-events-none absolute inset-x-4 bottom-4 flex gap-1.5">
+            <div className="pointer-events-none absolute inset-x-4 bottom-4 flex gap-1.5 mix-blend-difference">
               {product.images.map((name, i) => (
-                <span key={name} className={`h-[2px] flex-1 ${i === activeImage ? "bg-navy" : "bg-navy/20"}`} />
+                <span key={name} className={`h-[2px] flex-1 ${i === activeImage ? "bg-white" : "bg-white/25"}`} />
               ))}
             </div>
           </div>

@@ -28,15 +28,8 @@ const slides: HeroSlide[] = [
     offer: "Табак · Песок · Олива · Палисандр",
     cta: "Выбрать оттенок",
     href: "/catalog/",
-    images: ["pesok-2", "palisandr-2", "oliva-2"],
-  },
-  {
-    kicker: "Lookbook",
-    title: "Внимание к деталям",
-    offer: "Фактура · Фурнитура · Посадка",
-    cta: "Открыть lookbook",
-    href: "/lookbook/",
-    images: ["pesok-3", "tabak-3", "palisandr-3"],
+    images: ["pesok-int", "palisandr-int", "oliva-int"],
+    dark: true,
   },
 ];
 
@@ -48,7 +41,7 @@ export default function HomePage() {
       {/* Мозаика оттенков */}
       <section aria-label="Оттенки коллекции" className="grid grid-cols-2 md:grid-cols-3">
         {products.map((p, i) => {
-          const img = photo(p.images[0]);
+          const img = photo(p.lifestyle);
           return (
             <Link key={p.id} href={productHref(p)} className="tile group relative block">
               <div className="photo-stage aspect-[2/3]">
@@ -113,7 +106,7 @@ export default function HomePage() {
           <Reveal className="md:col-span-5 md:col-start-2">
             <div className="photo-stage aspect-[4/5]">
               <img
-                src={photo("palisandr-3").src}
+                src={photo("detail-int").src}
                 alt="Фактура и фурнитура куртки Gerutti крупным планом"
                 loading="lazy"
                 className="photo"

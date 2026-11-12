@@ -59,16 +59,16 @@ export function ProductCard({ product, sizes = "(min-width: 1024px) 25vw, 50vw" 
           })}
 
           {product.isNew && (
-            <span className="absolute left-3 top-3 border border-navy/70 px-2.5 py-1 text-[10px] font-medium uppercase leading-none tracking-[0.1em] text-navy">
+            <span className="absolute left-3 top-3 bg-paper/90 px-2.5 py-1.5 text-[10px] font-medium uppercase leading-none tracking-[0.1em] text-navy">
               New
             </span>
           )}
 
-          <div className="absolute inset-x-3 bottom-3 flex gap-1 opacity-100 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100">
+          <div className="absolute inset-x-3 bottom-3 flex gap-1 opacity-100 mix-blend-difference transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100">
             {product.images.map((name, i) => (
               <span
                 key={name}
-                className={`h-[2px] flex-1 transition-colors duration-300 ${i === index ? "bg-navy" : "bg-navy/20"}`}
+                className={`h-[2px] flex-1 transition-colors duration-300 ${i === index ? "bg-white" : "bg-white/25"}`}
               />
             ))}
           </div>

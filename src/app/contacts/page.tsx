@@ -80,10 +80,10 @@ export default function ContactsPage() {
 
         <div className="grid grid-cols-2">
           <div className="photo-stage aspect-[2/3] md:aspect-auto">
-            <img src={photo("pesok-2").src} alt="Куртка Gerutti, оттенок песок" className="photo" />
+            <img src={photo("pesok-int").src} alt="Куртка Gerutti, оттенок песок" className="photo" />
           </div>
           <div className="photo-stage aspect-[2/3] md:aspect-auto">
-            <img src={photo("oliva-2").src} alt="Куртка Gerutti, оттенок олива" className="photo" />
+            <img src={photo("oliva-int").src} alt="Куртка Gerutti, оттенок олива" className="photo" />
           </div>
         </div>
       </div>

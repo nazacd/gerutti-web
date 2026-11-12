@@ -5,11 +5,14 @@ export function asset(path: string): string {
   return `${basePath}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
-/** Фото товара: полный размер и уменьшенная версия для карточек. */
+/** Интерьерные кадры (имя заканчивается на -int) сохранены шире студийных. */
+function fullWidth(name: string): number {
+  return name.endsWith("-int") ? 1200 : 853;
+}
+
+/** Фото из /public/media: полный размер и уменьшенная версия для карточек. */
 export function photo(name: string) {
-  return {
-    src: asset(`/media/${name}.webp`),
-    small: asset(`/media/${name}-480.webp`),
-    srcSet: `${asset(`/media/${name}-480.webp`)} 480w, ${asset(`/media/${name}.webp`)} 853w`,
-  };
+  const src = asset(`/media/${name}.webp`);
+  const small = asset(`/media/${name}-480.webp`);
+  return { src, small, srcSet: `${small} 480w, ${src} ${fullWidth(name)}w` };
 }

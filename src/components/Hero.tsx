@@ -26,6 +26,8 @@ export type HeroSlide = {
   images?: [string, string, string];
   /** Видео на весь экран вместо кадров; шапка над ним становится белой */
   video?: HeroVideo;
+  /** Тёмные интерьерные кадры: на весь экран, с белой шапкой, как у видео */
+  dark?: boolean;
 };
 
 const DURATION = 8000;
@@ -70,7 +72,7 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
   }, [active]);
 
   // Над тёмным видео шапка сайта становится белой
-  const dark = !!current.video;
+  const dark = !!current.video || !!current.dark;
   useEffect(() => {
     document.documentElement.classList.toggle("hero-dark", dark);
     return () => document.documentElement.classList.remove("hero-dark");
@@ -100,7 +102,9 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
         return (
           <div
             key={slide.title}
-            className={`hero-slide ${i === active ? "is-active" : ""} ${video ? "is-dark" : ""}`}
+            className={`hero-slide ${i === active ? "is-active" : ""} ${video || slide.dark ? "is-dark" : ""} ${
+              video ? "is-video" : ""
+            }`}
             aria-hidden={i !== active}
             inert={i !== active}
           >

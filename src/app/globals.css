@@ -292,8 +292,19 @@ button {
 }
 
 .hero-slide.is-dark .hero-panels {
-  display: block;
   inset: var(--promo-h) 0 0 0;
+}
+
+.hero-slide.is-video .hero-panels {
+  display: block;
+}
+
+.hero-slide.is-dark .hero-panel {
+  background: #0d0705;
+}
+
+.hero-slide.is-dark .hero-panel img {
+  mix-blend-mode: normal;
 }
 
 .hero-media {

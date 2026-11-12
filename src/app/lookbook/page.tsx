@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { products, productHref } from "@/data/products";
 import { site } from "@/data/site";
-import { photo } from "@/lib/asset";
+import { asset, photo } from "@/lib/asset";
 import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -26,10 +26,20 @@ export default function LookbookPage() {
           Четыре оттенка осени
         </h1>
         <p className="mx-auto mt-7 max-w-[520px] text-[15px] leading-[1.75] text-muted">
-          Одна куртка, четыре характера. Мы сняли каждый оттенок в трёх планах, чтобы показать силуэт, посадку и
-          фактуру так, как вы увидите их в магазине.
+          Одна куртка, четыре характера. Каждый оттенок — в интерьере и крупным планом, чтобы показать силуэт,
+          посадку и фактуру.
         </p>
       </header>
+
+      <Reveal className="container-x mx-auto mb-20 max-w-[1360px] md:mb-36">
+        <div className="photo-stage aspect-[16/9]">
+          <img
+            src={asset("/media/interior-wide.webp")}
+            alt="Куртка Gerutti оттенка табак в интерьере библиотеки"
+            className="photo"
+          />
+        </div>
+      </Reveal>
 
       <div className="space-y-20 pb-20 md:space-y-36 md:pb-36">
         {products.map((p, i) => {
@@ -40,7 +50,7 @@ export default function LookbookPage() {
                 <Reveal className={`md:col-span-7 ${flip ? "md:order-2" : ""}`}>
                   <Link href={productHref(p)} className="tile block">
                     <div className="photo-stage aspect-[2/3]">
-                      <img src={photo(p.images[1]).src} alt={p.name} loading="lazy" className="photo" />
+                      <img src={photo(p.lifestyle).src} alt={p.name} loading="lazy" className="photo" />
                     </div>
                   </Link>
                 </Reveal>
@@ -53,7 +63,7 @@ export default function LookbookPage() {
                     <div className="grid grid-cols-2 gap-4 md:block md:space-y-6">
                       <Link href={productHref(p)} className="tile block">
                         <div className="photo-stage aspect-[2/3]">
-                          <img src={photo(p.images[2]).src} alt="" loading="lazy" className="photo" />
+                          <img src={photo(p.closeUp).src} alt="" loading="lazy" className="photo" />
                         </div>
                       </Link>
                       <div className="self-end md:self-auto">

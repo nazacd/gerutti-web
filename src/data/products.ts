@@ -10,8 +10,12 @@ export type Product = {
   price: number;
   isNew: boolean;
   description: string;
-  /** Имена файлов в /public/media без расширения: общий план, три четверти, крупный план */
-  images: [string, string, string];
+  /** Кадр в интерьере — для главной и lookbook */
+  lifestyle: string;
+  /** Крупный план фактуры */
+  closeUp: string;
+  /** Галерея товара: имена файлов в /public/media без расширения. Первый кадр — обложка карточки */
+  images: string[];
   sizes: { value: string; available: boolean }[];
   details: { label: string; value: string }[];
   order: number;
@@ -48,7 +52,9 @@ export const products: Product[] = [
     isNew: true,
     description:
       "Лаконичная куртка прямого кроя с отложным воротником и застёжкой на кнопки. Мягкая бархатистая фактура и тёплый табачный оттенок легко сочетаются с тёмным трикотажем и классическими брюками. Длина до линии бедра, два боковых прорезных кармана, манжеты на кнопке.",
-    images: ["tabak-1", "tabak-2", "tabak-3"],
+    lifestyle: "tabak-int",
+    closeUp: "tabak-3",
+    images: ["tabak-1", "tabak-int", "tabak-2", "tabak-3"],
     sizes,
     details: baseDetails("Табак", "GR-101"),
     order: 1,
@@ -65,7 +71,9 @@ export const products: Product[] = [
     isNew: true,
     description:
       "Светлая куртка прямого кроя с отложным воротником и застёжкой на кнопки. Песочный оттенок освежает тёмный гардероб и особенно выразительно смотрится с тёмно-синим. Длина до линии бедра, два боковых прорезных кармана, манжеты на кнопке.",
-    images: ["pesok-1", "pesok-2", "pesok-3"],
+    lifestyle: "pesok-int",
+    closeUp: "pesok-3",
+    images: ["pesok-1", "pesok-int", "pesok-2", "pesok-3"],
     sizes,
     details: baseDetails("Песок", "GR-102"),
     order: 2,
@@ -82,7 +90,9 @@ export const products: Product[] = [
     isNew: true,
     description:
       "Куртка прямого кроя в приглушённом оливковом оттенке. Отложной воротник, застёжка на кнопки и мягкая бархатистая фактура. Хорошо работает с коричневой и графитовой гаммой. Длина до линии бедра, два боковых прорезных кармана, манжеты на кнопке.",
-    images: ["oliva-1", "oliva-2", "oliva-3"],
+    lifestyle: "oliva-int",
+    closeUp: "oliva-3",
+    images: ["oliva-1", "oliva-int", "oliva-2", "oliva-3"],
     sizes,
     details: baseDetails("Олива", "GR-103"),
     order: 3,
@@ -99,7 +109,9 @@ export const products: Product[] = [
     isNew: true,
     description:
       "Куртка прямого кроя в глубоком оттенке палисандра — между шоколадом и сливой. Отложной воротник, застёжка на кнопки, мягкая бархатистая фактура. Самый выразительный цвет коллекции, лучше всего раскрывается рядом со светлым трикотажем. Длина до линии бедра, два боковых прорезных кармана.",
-    images: ["palisandr-1", "palisandr-2", "palisandr-3"],
+    lifestyle: "palisandr-int",
+    closeUp: "palisandr-3",
+    images: ["palisandr-1", "palisandr-int", "palisandr-2", "palisandr-3"],
     sizes,
     details: baseDetails("Палисандр", "GR-104"),
     order: 4,
